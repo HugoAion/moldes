@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Contador com Data de Atualização</title>
+    <script>
+        let count = 0;
+
+        // Função para adicionar o valor inserido ao contador
+        function addToCounter() {
+            const incrementValue = parseInt(document.getElementById("incremento").value);
+
+            // Verifica se o valor é um número válido
+            if (isNaN(incrementValue)) {
+                alert("Por favor, insira um número válido.");
+                return;
+            }
+
+            // Adiciona o valor ao contador
+            count += incrementValue;
+            document.getElementById("contador").innerText = count;
+
+            // Registra a data e hora da atualização
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString("pt-BR");
+            const formattedTime = currentDate.toLocaleTimeString("pt-BR");
+
+            // Exibe a data e hora da última atualização
+            document.getElementById("dataAtualizacao").innerText = `Última atualização em: ${formattedDate} às ${formattedTime}`;
+
+            // Limpa a caixa de texto
+            document.getElementById("incremento").value = "";
+        }
+
+        // Função para zerar o contador
+        function resetCounter() {
+            count = 0;
+            document.getElementById("contador").innerText = count;
+            document.getElementById("dataAtualizacao").innerText = "Contador zerado.";
+        }
+    </script>
+</head>
+<body>
+    <h1>Contador com Data de Atualização</h1>
+    <p>Valor atual: <span id="contador">0</span></p>
+    <p id="dataAtualizacao">Contador não atualizado ainda.</p>
+
+    <!-- Caixa de texto para o valor de incremento -->
+    <label for="incremento">Adicionar valor:</label>
+    <input type="number" id="incremento" placeholder="Insira o valor">
+
+    <!-- Botões para somar e zerar o contador -->
+    <button onclick="addToCounter()">Somar ao contador</button>
+    <button onclick="resetCounter()">Zerar contador</button>
+</body>
+</html>
